@@ -3,7 +3,7 @@ from setuptools import setup
 setup(
     name="cubat",
     description="CUBAT  -- CUB Analysis Toolkit",
-    version="0.1.5",
+    version="0.2.1",
     url="https://gxelab.github.io/CUBAT/",
     py_modules=["cubat"],
     include_package_data=True,
