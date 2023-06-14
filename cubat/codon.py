@@ -31,13 +31,13 @@ from Bio.Data import CodonTable
 CODONS = [i + j + k for i in 'ACGT' for j in 'ACGT' for k in 'ACGT']
 
 
-def get_codon_table(id=1):
+def get_codon_table(table=1):
     """
     Get Genetic Code by ID
 
     see available tables: `CodonTable.generic_by_id`
     """
-    codon_table = CodonTable.generic_by_id[id]
+    codon_table = CodonTable.generic_by_id[table]
 
     # insert stop codons
     c2a = codon_table.forward_table
@@ -60,3 +60,27 @@ def read_custom_table(path):
         if codon not in codon_table:
             exit(f'Codon Table is not complete: {codon}')
     return codon_table
+
+
+class GeneticCode():
+
+    def __init__(self, type, table=None, path=None):
+        if type == 'ncbi':
+            self.codon_table = get_codon_table(table)
+        elif type == 'custom':
+            self.codon_table = read_custom_table(path)
+        else:
+            raise ValueError(f'type must be one of "ncbi" or "custom"')
+        
+        self.codon_weights = pd.DataFrame()
+    
+    def aa_to_codon(self):
+        """
+        Return a Dict of AA to codons mappings
+        """
+        a2c = dict()
+        for codon, aa in self.codon_table.items():
+            if aa not in a2c:
+                a2c[aa] = []
+            a2c[aa].append(codon)
+        return a2c
