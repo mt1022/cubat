@@ -28,7 +28,7 @@
 from Bio.Data import CodonTable
 
 # codons
-codons = [i + j + k for i in 'ACGT' for j in 'ACGT' for k in 'ACGT']
+CODONS = [i + j + k for i in 'ACGT' for j in 'ACGT' for k in 'ACGT']
 
 
 def get_codon_table(id=1):
@@ -44,7 +44,7 @@ def get_codon_table(id=1):
     for codon in codon_table.stop_codons:
         c2a[codon] = '*'
     
-    return {codon: c2a[codon] for codon in codons}
+    return {codon: c2a[codon] for codon in CODONS}
 
 
 def read_custom_table(path):
@@ -56,7 +56,7 @@ def read_custom_table(path):
         for line in fh:
             ary = line.rstrip().split(',')
             codon_table[ary[0]] = ary[1]
-    for codon in codons:
+    for codon in CODONS:
         if codon not in codon_table:
             exit(f'Codon Table is not complete: {codon}')
     return codon_table
