@@ -1,1 +1,1 @@
-# CUBAT-CodonUsageBiasAnalysisToolkit.github.io
+gxelab.github.io/cubat/
