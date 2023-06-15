@@ -71,8 +71,6 @@ class GeneticCode():
             self.codon_table = read_custom_table(path)
         else:
             raise ValueError(f'type must be one of "ncbi" or "custom"')
-        
-        self.codon_weights = pd.DataFrame()
     
     def aa_to_codon(self):
         """

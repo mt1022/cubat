@@ -19,8 +19,8 @@ class CDS(SeqRecord):
         Returns a list of codons in the DNA sequence.
         """
         codons = []
-        for i in range(0, len(self.sequence), 3):
-            codons.append(self.sequence[i:i + 3])
+        for i in range(0, len(self.seq), 3):
+            codons.append(self.seq[i:i + 3])
         return codons
 
     def calc_codon_freq(self):
@@ -59,4 +59,5 @@ class CDSDict(defaultdict):
         Returns a pandas.DataFrame of codon frequencies in the CDSs.
         """
         codon_freq = pd.DataFrame([self[id].calc_codon_freq() for id in self])
-        return codon_freq.transpose()
+        codon_freq.index = list(self.keys())
+        return codon_freq
